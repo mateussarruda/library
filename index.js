@@ -36,10 +36,27 @@ let tbody = document.createElement('tbody');
 table.appendChild(thead);
 table.appendChild(tbody);
 
-/* let trThead = document.createElement('tr');
-thead.appendChild(trThead); */
 
-
+function deleteBtn() {
+    const button = document.createElement('button');
+    const image = document.createElement('img');
+    image.src = './img/delete.svg'
+    image.alt = 'Delete button';
+    button.setAttribute('id', 'deleteBtn');
+    button.appendChild(image);
+    button.onclick = deleteClick;
+    return button;
+}
+function deleteClick(e) {
+    const row = e.target.parentNode.parentNode;
+    const id = row.getAttribute('data-id');
+    for (let index = 0; index < myLibrary.length; index++) {
+        if (myLibrary[index].id === id) {
+            myLibrary.splice(index, 1);
+        }
+    }
+    row.remove();
+}
 
 let = columns = ['title', 'author', 'pages', 'read'];
 let row = document.createElement('tr')
@@ -52,7 +69,7 @@ const output = document.querySelector('.output');
 thead.appendChild(row);
 output.appendChild(table);
 
-addBookBtn.addEventListener('click', (e) => {
+document.querySelector('.form-book').addEventListener('submit', (e) => {
     e.preventDefault();
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
@@ -61,7 +78,7 @@ addBookBtn.addEventListener('click', (e) => {
     const author = document.querySelector('#author');
     const pages = document.querySelector('#pages');
     const read = document.querySelector('#read');
-    let book = new Book(title.value, author.value, pages.value, read.value);
+    let book = new Book(title.value, author.value, pages.value, read.checked);
     addBookToLibrary(book);
     for (let book of myLibrary) {
         let row = document.createElement('tr');
@@ -69,9 +86,12 @@ addBookBtn.addEventListener('click', (e) => {
             let td = document.createElement('td');
             if (typeof book[item] !== 'function' && item !== 'id') {
                 td.textContent = book[item];
+                row.setAttribute('data-id', book.id);
                 row.appendChild(td);
             }
             tbody.appendChild(row);
         }
+        row.appendChild(deleteBtn());
     }
+    document.querySelector('.form-book').reset();
 });
