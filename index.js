@@ -57,6 +57,32 @@ function deleteClick(e) {
     }
     row.remove();
 }
+function showTable(tbody) {
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+    for (let book of myLibrary) {
+        let row = document.createElement('tr');
+        for (let item of Object.keys(book)) {
+            let td = document.createElement('td');
+            if (typeof book[item] !== 'function' && item !== 'id') {
+                td.textContent = book[item];
+                row.setAttribute('data-id', book.id);
+                row.appendChild(td);
+            }
+            tbody.appendChild(row);
+        }
+        row.appendChild(deleteBtn());
+    }
+}
+function getBookInput() {
+    const title = document.querySelector('#title');
+    const author = document.querySelector('#author');
+    const pages = document.querySelector('#pages');
+    const read = document.querySelector('#read');
+    let book = new Book(title.value, author.value, pages.value, read.checked);
+    return book;
+}
 
 let = columns = ['title', 'author', 'pages', 'read'];
 let row = document.createElement('tr')
@@ -71,27 +97,9 @@ output.appendChild(table);
 
 document.querySelector('.form-book').addEventListener('submit', (e) => {
     e.preventDefault();
-    while (tbody.firstChild) {
-        tbody.removeChild(tbody.firstChild);
-    }
-    const title = document.querySelector('#title');
-    const author = document.querySelector('#author');
-    const pages = document.querySelector('#pages');
-    const read = document.querySelector('#read');
-    let book = new Book(title.value, author.value, pages.value, read.checked);
-    addBookToLibrary(book);
-    for (let book of myLibrary) {
-        let row = document.createElement('tr');
-        for (let item of Object.keys(book)) {
-            let td = document.createElement('td');
-            if (typeof book[item] !== 'function' && item !== 'id') {
-                td.textContent = book[item];
-                row.setAttribute('data-id', book.id);
-                row.appendChild(td);
-            }
-            tbody.appendChild(row);
-        }
-        row.appendChild(deleteBtn());
-    }
+    
+    
+    addBookToLibrary(getBookInput());
+    showTable(tbody);
     document.querySelector('.form-book').reset();
 });
