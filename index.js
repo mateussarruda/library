@@ -57,6 +57,41 @@ function deleteClick(e) {
     }
     row.remove();
 }
+function buttonRead(id) {
+    const button = document.createElement('input');
+    button.type = 'checkbox';
+    if(getRead(id)) {
+        button.checked = true;
+    } else {
+        button.checked = false;
+    }
+    button.onclick = changeReadStatus;
+    return button;
+}
+function getRead(id) {
+    for(let book of myLibrary) {
+        if(book.id === id) {
+            return book.read;
+        }
+    }
+}
+function changeReadStatus(e) {
+    const row = e.target.parentNode.parentNode;
+    const bookId = row.getAttribute('data-id')
+    for(let index = 0; index < myLibrary.length; index++) {
+        if(myLibrary[index].id === bookId) {
+            console.log(myLibrary[index]);
+            if (e.target.checked) {
+                myLibrary[index].read = true;
+                e.target.checked = true;
+            } else {
+                myLibrary[index].read = false;
+                e.target.checked = false;
+            }
+        }
+    }
+    showTable(tbody);
+}
 function showTable(tbody) {
     while (tbody.firstChild) {
         tbody.removeChild(tbody.firstChild);
@@ -66,7 +101,12 @@ function showTable(tbody) {
         for (let item of Object.keys(book)) {
             let td = document.createElement('td');
             if (typeof book[item] !== 'function' && item !== 'id') {
-                td.textContent = book[item];
+                if (item === 'read') {
+                    td.textContent = book[item];
+                    td.appendChild(buttonRead(book.id));
+                } else {
+                    td.textContent = book[item];
+                }
                 row.setAttribute('data-id', book.id);
                 row.appendChild(td);
             }
