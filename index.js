@@ -112,7 +112,9 @@ function showTable(tbody) {
             }
             tbody.appendChild(row);
         }
-        row.appendChild(deleteBtn());
+        const tdDelete = document.createElement('td');
+        tdDelete.appendChild(deleteBtn());
+        row.appendChild(tdDelete);
     }
 }
 function getBookInput() {

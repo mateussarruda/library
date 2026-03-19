@@ -19,6 +19,7 @@ table td {
     border: 1px solid rgb(34, 42, 64);
 }
 td:nth-child(3),
-td:nth-child(4) {
+td:nth-child(4),
+td:nth-child(5) {
     text-align: center;
 }
