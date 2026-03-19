@@ -1,0 +1,27 @@
+.form-book {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+.form-book .row {
+    display: flex;
+    flex-direction: column;
+}
+.row ~ .row-read {
+    display: flex;
+    flex-direction: row;
+}
+.form-book input[type='text'] {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 8px;
+}
+.form-book button[type='submit'] {
+    color: antiquewhite;
+    background-color: rgb(163, 181, 230);
+    border: 1px solid blue;
+}
+.form-book legend {
+    text-align: center;
+}
