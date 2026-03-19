@@ -48,7 +48,9 @@ function deleteBtn() {
     return button;
 }
 function deleteClick(e) {
-    const row = e.target.parentNode.parentNode;
+    const td = e.target.parentNode.parentNode;
+    const row = td.parentNode;
+    console.log(row);
     const id = row.getAttribute('data-id');
     for (let index = 0; index < myLibrary.length; index++) {
         if (myLibrary[index].id === id) {
