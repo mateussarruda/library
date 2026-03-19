@@ -1,0 +1,24 @@
+.output table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.output th {
+    padding: 16px;
+}
+th {
+    text-align: center;
+}
+.output td {
+    padding: 16px;
+}
+table {
+    border: 1px solid rgb(163, 181, 230);
+}
+table th,
+table td {
+    border: 1px solid rgb(34, 42, 64);
+}
+td:nth-child(3),
+td:nth-child(4) {
+    text-align: center;
+}
