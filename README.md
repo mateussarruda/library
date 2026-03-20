@@ -18,4 +18,4 @@ Biblioteca - projeto do The Odin Project
     ![Imagem com as características do livro e com o checkbox de livro lido destacado](img/read-button.png)
 # Imagem da tela completa
 
-   ![Imagem da tela completa](img/screen.png)
+    ![Imagem da tela completa](img/screen.png)
